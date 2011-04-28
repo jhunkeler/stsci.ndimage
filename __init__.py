@@ -28,26 +28,21 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from __future__ import division
 import numpy
 from filters import *
 from fourier import *
 from interpolation import *
 from measurements import *
 from morphology import *
+from io import *
+
+# doccer is moved to scipy.misc in scipy 0.8
+from scipy.misc import doccer
+doccer = numpy.deprecate(doccer, old_name='doccer',
+                         new_name='scipy.misc.doccer')
 
 from info import __doc__
 __version__ = '2.0'
 
-try:
-    # from .svn_version import __svn_version__, __full_svn_info__
-    from svn_version import __svn_version__, __full_svn_info__
-except:
-    __svn_version__ = 'Unable to determine SVN revision'
-    __full_svn_info__ = __svn_version__
-
-import pytools.tester
-
-def test(*args,**kwds):
-    pytools.tester.test(modname=__name__, *args, **kwds)
-
+from numpy.testing import Tester
+test = Tester().test

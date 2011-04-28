@@ -28,7 +28,6 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from __future__ import division
 import types
 import numpy
 
@@ -46,9 +45,9 @@ def _extend_mode_to_code(mode):
     elif mode == 'constant':
         return 4
     else:
-        raise RuntimeError, 'boundary mode not supported'
+        raise RuntimeError('boundary mode not supported')
 
-def _normalize_sequence(input, rank, array_type = None):
+def _normalize_sequence(input, rank, array_type=None):
     """If input is a scalar, create a sequence of length equal to the
     rank by duplicating the input. If input is a sequence,
     check if its length is equal to the length of array.
@@ -60,21 +59,10 @@ def _normalize_sequence(input, rank, array_type = None):
         normalized = list(input)
         if len(normalized) != rank:
             err = "sequence argument must have length equal to input rank"
-            raise RuntimeError, err
+            raise RuntimeError(err)
     return normalized
 
-import warnings
-def _get_output(output, input, output_type = None, shape = None):
-    if output_type is not None:
-        msg = "'output_type' argument is deprecated."
-        msg += " Assign type to 'output' instead."
-        raise RuntimeError, msg
-        warnings.warn(msg, DeprecationWarning)
-        if output is None:
-            output = output_type
-        elif ((type(output) is not type(types.TypeType)) or
-              output.dtype != output_type):
-            raise RuntimeError, "'output' type and 'output_type' not equal"
+def _get_output(output, input, shape=None):
     if shape is None:
         shape = input.shape
     if output is None:
@@ -89,7 +77,7 @@ def _get_output(output, input, output_type = None, shape = None):
         return_value = output
     else:
         if output.shape != shape:
-            raise RuntimeError, "output shape not correct"
+            raise RuntimeError("output shape not correct")
         return_value = None
     return output, return_value
 
@@ -97,5 +85,5 @@ def _check_axis(axis, rank):
     if axis < 0:
         axis += rank
     if axis < 0 or axis >= rank:
-        raise ValueError, 'invalid axis'
+        raise ValueError('invalid axis')
     return axis
