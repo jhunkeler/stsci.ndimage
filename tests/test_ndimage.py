@@ -35,7 +35,7 @@ from numpy import fft
 from numpy.testing import assert_, assert_equal, assert_array_equal, \
         TestCase, run_module_suite, \
         assert_array_almost_equal, assert_almost_equal
-import scipy.ndimage as ndimage
+import stsci.ndimage as ndimage
 
 eps = 1e-12
 

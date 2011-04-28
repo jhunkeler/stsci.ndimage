@@ -28,6 +28,7 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from __future__ import division
 import numpy
 import numpy as np
 import _ni_support
@@ -263,7 +264,7 @@ def labeled_comprehension(input, labels, index, func, out_dtype, default, pass_p
                       [5, 3, 0, 4],
                       [0, 0, 0, 7],
                       [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> lbl, nlbl = ndimage.label(a)
     >>> lbls = np.arange(1, nlbl+1)
     >>> ndimage.labeled_comprehension(a, lbl, lbls, np.mean, float, 0)
@@ -576,7 +577,7 @@ def variance(input, labels = None, index = None):
                       [5, 3, 0, 4],
                       [0, 0, 0, 7],
                       [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.variance(a)
     7.609375
 
@@ -629,7 +630,7 @@ def standard_deviation(input, labels = None, index = None):
                       [5, 3, 0, 4],
                       [0, 0, 0, 7],
                       [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.standard_deviation(a)
     2.7585095613392387
 
@@ -854,7 +855,7 @@ def maximum(input, labels = None, index = None):
            [1, 1, 0, 0],
            [0, 2, 2, 0],
            [0, 2, 2, 0]])
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.maximum(a)
     15.0
     >>> ndimage.maximum(a, labels=labels, index=[1,2])
@@ -952,7 +953,7 @@ def extrema(input, labels = None, index = None):
                       [5, 3, 0, 4],
                       [0, 0, 0, 7],
                       [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.extrema(a)
     (0, 9, (0, 2), (3, 0))
 
@@ -1015,7 +1016,7 @@ def center_of_mass(input, labels = None, index = None):
                       [0,1,1,0],
                       [0,1,1,0],
                       [0,1,1,0]))
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.measurements.center_of_mass(a)
     (2.0, 1.5)
 
@@ -1077,7 +1078,7 @@ def histogram(input, min, max, bins, labels = None, index = None):
                       [ 0.    ,  0.    ,  0.    ,  0.    ],
                       [ 0.    ,  0.    ,  0.7181,  0.2787],
                       [ 0.    ,  0.    ,  0.6573,  0.3094]])
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.measurements.histogram(a, 0, 1, 10)
     array([13,  0,  2,  1,  0,  1,  1,  2,  0,  0])
 

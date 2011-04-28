@@ -28,6 +28,7 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from __future__ import division
 import numpy
 import _ni_support
 import _nd_image
@@ -2092,7 +2093,7 @@ def distance_transform_edt(input, sampling = None,
                       [0,1,1,1,1],
                       [0,1,1,1,0],
                       [0,1,1,0,0]))
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.distance_transform_edt(a)
     array([[ 0.    ,  1.    ,  1.4142,  2.2361,  3.    ],
            [ 0.    ,  0.    ,  1.    ,  2.    ,  2.    ],

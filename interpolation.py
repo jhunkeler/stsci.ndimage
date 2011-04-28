@@ -28,6 +28,7 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from __future__ import division
 import math
 import numpy
 import _ni_support
@@ -252,7 +253,7 @@ def map_coordinates(input, coordinates, output=None, order=3,
 
     Examples
     --------
-    >>> import scipy.ndimage
+    >>> import stsci.ndimage
     >>> a = np.arange(12.).reshape((4, 3))
     >>> a
     array([[  0.,   1.,   2.],

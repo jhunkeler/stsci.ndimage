@@ -28,11 +28,12 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from __future__ import division
 import math
 import numpy
 import _ni_support
 import _nd_image
-from scipy.misc import doccer
+import doccer
 
 _input_doc = \
 """input : array-like
@@ -589,7 +590,7 @@ def convolve(input, weights, output = None, mode = 'reflect', cval = 0.0,
     ....    [0, 0, 0, 7],
     ....    [9, 3, 0, 0]])
     >>> b = np.array([[1,1,1],[1,1,0],[1,0,0]])
-    >>> from scipy import ndimage
+    >>> from stsci import ndimage
     >>> ndimage.convolve(a, k, mode='constant', cval=0.0)
     array([[11, 10,  7,  4],
            [10,  3, 11, 11],
