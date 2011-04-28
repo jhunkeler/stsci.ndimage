@@ -3,7 +3,7 @@ from numpy.testing import assert_, assert_array_almost_equal, assert_equal, \
                           run_module_suite, TestCase
 import numpy as np
 
-import scipy.ndimage as ndimage
+import stsci.ndimage as ndimage
 
 types = [np.int8, np.uint8, np.int16,
          np.uint16, np.int32, np.uint32,

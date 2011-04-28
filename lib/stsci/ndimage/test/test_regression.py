@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.testing import assert_array_almost_equal, run_module_suite
 
-import scipy.ndimage as ndimage
+import stsci.ndimage as ndimage
 
 def test_byte_order_median():
     """Regression test for #413: median_filter does not handle bytes orders."""

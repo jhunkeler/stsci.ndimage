@@ -4,7 +4,7 @@ import numpy as np
 
 from numpy.testing import assert_equal, assert_raises
 
-import scipy.ndimage as sndi
+import stsci.ndimage as sndi
 
 
 def test_ticket_701():
