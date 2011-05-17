@@ -7,76 +7,29 @@ except ImportError:
     use_setuptools()
     from setuptools import setup
 
-import os
-from ConfigParser import ConfigParser
-
-import pkg_resources
-
-
-SETUP_REQUIRES = ['d2to1', 'stsci.distutils==0.2']
-
-
-# This project requires utilities from the stsci.distutils package in order to
-# build.  If stsci.distutils is not already installed, it may automatically be
-# downloaded from PyPI.  However, in a full source distribution of
-# stsci_python, it should also be available in a sibling directory to this one,
-# so that should be used instead if possible.
-for requirement in pkg_resources.parse_requirements(SETUP_REQUIRES):
-    if requirement.project_name != 'stsci.distutils':
-        continue
-
+try:
+    from stsci.distutils.command.easier_install import easier_install
+except ImportError:
+    import os
+    import sys
+    stsci_distutils = os.path.abspath(os.path.join('..', 'distutils', 'lib'))
+    if os.path.exists(stsci_distutils) and stsci_distutils not in sys.path:
+        sys.path.append(stsci_distutils)
     try:
-        # See if the required version of stsci.distutils is already available
-        pkg_resources.get_distribution(requirement)
-        has_stsci_distutils = True
-    except (pkg_resources.VersionConflict,
-            pkg_resources.DistributionNotFound):
-        has_stsci_distutils = False
-
-    if has_stsci_distutils:
-        break
-
-    tools_dir = os.path.join(os.path.pardir, 'distutils')
-    setup_cfg = os.path.join(tools_dir, 'setup.cfg')
-    if os.path.exists(setup_cfg):
-        # Check the setup.cfg in ../distutils; make sure it is in fact for
-        # stsci.distutils and that the version is as required
-        cfg = ConfigParser()
-        cfg.read(setup_cfg)
-        if not cfg.has_option('metadata', 'name'):
-            break
-        name = cfg.get('metadata', 'name')
-        if name != 'stsci.distutils':
-            break
-        if cfg.has_option('metadata', 'version'):
-            version = cfg.get('metadata', 'version')
-        else:
-            version = None
-        if version not in requirement:
-            break
-
-        # stsci.distutils will almost always have packages_root = lib, but
-        # better not to make assumptions
-        if cfg.has_option('files', 'packages_root'):
-            location = os.path.join(tools_dir,
-                                    cfg.get('files', 'packages_root'))
-        else:
-            location = tools_dir
-
-        # If a different version of stsci.distutils is already in the current
-        # distribution list, remove it and add a distribution pointing to our
-        # source-local copy
-        dist = pkg_resources.Distribution(
-                location=location, project_name=name, version=version,
-                precedence=pkg_resources.CHECKOUT_DIST)
-        if name in pkg_resources.working_set.by_key:
-            del pkg_resources.working_set.by_key[name]
-        pkg_resources.working_set.add(dist)
-    break
+        from stsci.distutils.command.easier_install import easier_install
+        import setuptools.command.easy_install
+        setuptools.command.easy_install.easy_install = easier_install
+    except ImportError:
+        # If even this failed, we're not in an stsci_python source checkout,
+        # so there's nothing gained from using easier_install
+        from setuptools.command.easy_install import easy_install
+        easier_install = easy_install
 
 
 setup(
-    setup_requires=SETUP_REQUIRES,
+    setup_requires=['d2to1', 'stsci.distutils>=0.2dev'],
     d2to1=True,
-    use_2to3=True
+    use_2to3=True,
+    # TODO: Move this to setup.cfg once d2to1 supports custom command classes
+    cmdclass={'easy_install': easier_install}
 )
