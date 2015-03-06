@@ -29,7 +29,6 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import division
-import types
 import numpy
 import _ni_support
 import _nd_image
@@ -42,7 +41,7 @@ def _get_output_fourier(output, input):
         else:
             output = numpy.zeros(input.shape, dtype = numpy.float64)
         return_value = output
-    elif type(output) is types.TypeType:
+    elif isinstance(output, type):
         if output not in [numpy.complex64, numpy.complex128,
                           numpy.float32, numpy.float64]:
             raise RuntimeError("output type not supported")
@@ -61,7 +60,7 @@ def _get_output_fourier_complex(output, input):
         else:
             output = numpy.zeros(input.shape, dtype = numpy.complex128)
         return_value = output
-    elif type(output) is types.TypeType:
+    elif isinstance(output, type):
         if output not in [numpy.complex64, numpy.complex128]:
             raise RuntimeError("output type not supported")
         output = numpy.zeros(input.shape, dtype = output)

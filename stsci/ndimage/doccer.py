@@ -2,7 +2,11 @@
 parameters into function and method docstrings'''
 
 import sys
-
+if sys.version_info[0] > 2:
+    maximum_int = sys.maxsize
+else:
+    maximum_int = sys.maxint
+    
 def docformat(docstring, docdict=None):
     ''' Fill a function docstring from variables in dictionary
 
@@ -77,12 +81,12 @@ def indentcount_lines(lines):
     >>> indentcount_lines(['    '])
     0
     '''
-    indentno = sys.maxint
+    indentno = maximum_int
     for line in lines:
         stripped = line.lstrip()
         if stripped:
             indentno = min(indentno, len(line) - len(stripped))
-    if indentno == sys.maxint:
+    if indentno == maximum_int:
         return 0
     return indentno
 

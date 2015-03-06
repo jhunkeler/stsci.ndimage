@@ -550,7 +550,7 @@ def rotate(input, angle, axes=(1, 0), reshape=True,
         The two axes that define the plane of rotation. Default is the first
         two axes.
     reshape : bool, optional
-        If `reshape` is true, the output shape is adapted so that the input
+        If `reshape` is true, the output shape is adapted sols *.py that the input
         array is contained completely in the output. Default is True.
     output : ndarray or dtype, optional
         The array in which to place the output, or the dtype of the returned
@@ -641,7 +641,7 @@ def rotate(input, angle, axes=(1, 0), reshape=True,
                 coordinates.append(0)
             else:
                 coordinates.append(slice(None, None, None))
-        iter_axes = range(input.ndim)
+        iter_axes = list(range(input.ndim))
         iter_axes.reverse()
         iter_axes.remove(axes[0])
         iter_axes.remove(axes[1])

@@ -29,8 +29,16 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import division
-import types
+
+import sys
 import numpy
+
+if sys.version_info[0] > 2:
+    string_types = str
+    number_types = (int, float)
+else:
+    string_types = basestring
+    number_types = (int, long, float)
 
 def _extend_mode_to_code(mode):
     """Convert an extension mode to the corresponding integer code.
@@ -53,8 +61,7 @@ def _normalize_sequence(input, rank, array_type=None):
     rank by duplicating the input. If input is a sequence,
     check if its length is equal to the length of array.
     """
-    if (isinstance(input, (types.IntType, types.LongType,
-                           types.FloatType))):
+    if isinstance(input, number_types):
         normalized = [input] * rank
     else:
         normalized = list(input)
@@ -69,10 +76,10 @@ def _get_output(output, input, shape=None):
     if output is None:
         output = numpy.zeros(shape, dtype = input.dtype.name)
         return_value = output
-    elif type(output) in [type(types.TypeType), type(numpy.zeros((4,)).dtype)]:
+    elif isinstance(output, (type(type), type(numpy.zeros((4,)).dtype))):
         output = numpy.zeros(shape, dtype = output)
         return_value = output
-    elif type(output) is types.StringType:
+    elif isinstance(output, string_types):
         output = numpy.typeDict[output]
         output = numpy.zeros(shape, dtype = output)
         return_value = output
