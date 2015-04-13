@@ -31,9 +31,10 @@
 from __future__ import division
 import math
 import numpy
-import _ni_support
-import _nd_image
-import doccer
+
+from . import _ni_support
+from . import _nd_image
+from . import doccer
 
 _input_doc = \
 """input : array-like

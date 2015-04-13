@@ -31,8 +31,8 @@
 from __future__ import division
 import math
 import numpy
-import _ni_support
-import _nd_image
+from . import _ni_support
+from . import _nd_image
 
 def _extend_mode_to_code(mode):
     mode = _ni_support._extend_mode_to_code(mode)

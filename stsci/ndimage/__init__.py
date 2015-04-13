@@ -30,14 +30,14 @@
 
 from __future__ import division
 import numpy
-from filters import *
-from fourier import *
-from interpolation import *
-from measurements import *
-from morphology import *
-from io import *
+from .filters import *
+from .fourier import *
+from .interpolation import *
+from .measurements import *
+from .morphology import *
+from .io import *
 
-from info import __doc__
+from .info import __doc__
 
 from .version import *
 

@@ -30,9 +30,9 @@
 
 from __future__ import division
 import numpy
-import _ni_support
-import _nd_image
-import filters
+from . import _ni_support
+from . import _nd_image
+from . import filters
 
 
 def _center_is_true(structure, origin):
