@@ -30,8 +30,8 @@
 
 from __future__ import division
 import numpy
-import _ni_support
-import _nd_image
+from . import _ni_support
+from . import _nd_image
 
 def _get_output_fourier(output, input):
     if output is None:

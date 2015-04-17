@@ -31,9 +31,9 @@
 from __future__ import division
 import numpy
 import numpy as np
-import _ni_support
-import _nd_image
-import morphology
+from . import _ni_support
+from . import _nd_image
+from . import morphology
 
 def label(input, structure = None, output = None):
     """
